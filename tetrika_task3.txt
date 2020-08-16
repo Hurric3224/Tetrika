@@ -1,0 +1,16 @@
+select user.ID, lessons.schedule_time, quality.avg(tech_qual)
+from 	(select tech_qual
+	from quality inner join
+	lessons on quality.lesson_id = lesson.ID
+	where	((subject = 'phys'),
+		(select role	
+		from users inner join
+		participant on users.ID = participant.user_id
+		where role = 'pupil')),
+	(select distinct ID from users
+	where role = 'tutor'),
+	(select adddate(min(scedule_time
+	from lessons, interval 1 day)	
+		
+		
+		
